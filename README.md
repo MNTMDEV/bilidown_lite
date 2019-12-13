@@ -48,6 +48,9 @@ py程序的参数
 
 ![图片](https://raw.githubusercontent.com/MNTMDEV/bilidown_lite/master/pic/3.png)
 
+## 新增的bypass_480.py
+
+为什么说是bypass_480呢，这个可是确实已经达到了完全自动化的目标，但是你是知道的，游客所能看到的bili视频最高画质就是480，你没有登录的Cookies，bilibili自然不会叫你看高画质的视频，当然更别提下载它的源文件了。就不多说了，好处自然是输入https://www.bilibili.com/video/avxxxxxxxx就能全自动下载，缺点你懂的，高画质别想了，如果还要让程序输入Cookies，那还不如直接使用上面那个最简版的用抓包来做呢。当然，不要忽略一点，这个家伙还是支持下载同一个av号不同页的视频哦。
 
 ## TODO
 
