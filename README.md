@@ -19,7 +19,7 @@ b站源视频下载轻量级，这将是第一个README比程序更有用、展�
 - 对非专业人员不友好。(不过来看代码的基本功都不会我信你个鬼啊)
 - 没做GUI。(就两个输入，做个毛线GUI啊)
 
-## 操作步骤
+## 操作步骤(Flash播放器)
 
 - 首先，要有chrome浏览器、python运行环境、[ffmpeg](http://ffmpeg.org/download.html)，要安装requests(一行pip install requests的事)
 - 打开chrome浏览器，打开bilibili视频页，启用flash，切换bilibili的flash播放器，选择好要下载的画质
@@ -30,7 +30,18 @@ b站源视频下载轻量级，这将是第一个README比程序更有用、展�
 - 在py程序中粘贴Referer值，回车
 - 它会生成一个1.tmp的文件，改成.flv格式的，如果你不喜欢flv格式的，可以使用ffmpeg -i 1.flv 1.mp4这样的命令转格式(前提你有ffmpeg)
 
-## 演示截图
+## 操作步骤(H5播放器)
+
+- 同样，要有chrome浏览器、python运行环境、[ffmpeg](http://ffmpeg.org/download.html)，要安装requests(一行pip install requests的事)
+- 打开chrome浏览器，打开bilibili视频页，使用bilibili默认的H5播放器，选择好要下载的画质
+- F12打开调试，选择Network，然后刷新网页
+- 网站刚开始会加载一堆文件，这些不用管。直接搜m4s后缀的request包，会有2个包，一个是音频一个是视频，复制它们的URL，应该是.m4s?后面跟着一堆参数的那种
+- 打开这个py程序，粘贴URL，回车
+- 复制浏览器地址栏中视频的地址
+- 在py程序中粘贴Referer值，回车
+- 两次它都会生成1.tmp的文件，都改成.mp4格式的，然后视频音频自然你就能区分出来了，然后上ffmpeg，把视频音频全打到一个文件里
+
+## 演示截图(Flash播放器)
 
 就拿bilibili的这个视频试试手吧！！！
 
@@ -54,6 +65,7 @@ py程序的参数
 
 ## TODO
 
-- [ ] 做一个对于H5播放器的版本的类似功能
+- [x] 做一个对于H5播放器的版本的类似功能(bypass已经支持)
+- [ ] bypass_480做一个对于H5播放器的版本的类似功能
 - [ ] 如果能把它的思想集成到chrome插件中实现就太给力了，比那些GUI程序更上一档
 
