@@ -1,0 +1,36 @@
+{
+  "name": "Bilibili download",
+  "description": "Bilibili download helper",
+  "version": "1.1",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*/"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "content.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Bilibili download",
+    "default_icon": {
+      "1": "favicon.png"
+    }
+  },
+  "manifest_version": 2
+}
