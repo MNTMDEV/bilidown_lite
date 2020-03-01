@@ -74,7 +74,7 @@ Update:关于CRX_REQUIRED_PROOF_MISSING问题的解释
 
 拖入窗口如果显示的下载crx，一定会出现CRX_REQUIRED_PROOF_MISSING错误；
 
-开启开发者模式+刷新的情况下，拖入时北京会出现遮盖层。
+开启开发者模式+刷新的情况下，拖入时背景会出现遮盖层。
 
 ## TODO
 
