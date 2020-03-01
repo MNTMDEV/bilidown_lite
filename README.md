@@ -67,9 +67,13 @@ py程序的参数
 
 这个就是我开发的第一个可用的chrome拓展版的bilidown插件了。你可以用它下载高画质视频，如果你登录的用户是大会员，您还可以下载大会员专属的视频。
 这个版本有些细节问题还需完善，后续还会更新。
+
 Update:关于CRX_REQUIRED_PROOF_MISSING问题的解释
+
 这个程序没有上架商店，因此没有得到签名，必须开启开发者模式，再刷新chrome://extension/之后即可正常使用
-拖入窗口如果显示的下载crx，一定会出现CRX_REQUIRED_PROOF_MISSING错误
+
+拖入窗口如果显示的下载crx，一定会出现CRX_REQUIRED_PROOF_MISSING错误；
+
 开启开发者模式+刷新的情况下，拖入时北京会出现遮盖层。
 
 ## TODO
