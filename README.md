@@ -82,3 +82,4 @@ Update:关于CRX_REQUIRED_PROOF_MISSING问题的解释
 - [ ] bypass_480做一个对于H5播放器的版本的类似功能
 - [x] 如果能把它的思想集成到chrome插件中实现就太给力了，比那些GUI程序更上一档
 - [ ] 解决chrome插件中视频多开如何识别各个标签页的下载链接
+- [ ] chrome插件一个报错但不影响执行的问题
