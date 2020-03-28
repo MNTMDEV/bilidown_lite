@@ -15,8 +15,11 @@ def down_flv(avu,url):
             f.write(chunk)
     print("Complete!")
 
-def proc_request(avu,aid):
-    cidText=requests.get("https://api.bilibili.com/x/web-interface/view?aid="+str(aid)).text
+def proc_request(avu,aid,flag):
+    tstr="aid"
+    if(flag==1):
+        tstr="bvid"
+    cidText=requests.get("https://api.bilibili.com/x/web-interface/view?"+tstr+"="+str(aid)).text
     cidText=json.loads(cidText)
     cidPages=cidText['data']['pages']
     print("Here are pages:")
@@ -24,7 +27,6 @@ def proc_request(avu,aid):
         print("Page "+str(i)+":"+cidPages[i]['part'])
     i=int(input("Select:"))
     cid=cidPages[i]['cid']
-    # cid=cidText['data']['cid']
     print("You can select the following quality:")
     print("[1]360 [2]480")
     mode=input("Select:")
@@ -35,7 +37,10 @@ def proc_request(avu,aid):
     else:
         print("Invalid choice!")
         exit(0)
-    url="https://api.bilibili.com/x/player/playurl?cid="+str(cid)+"&avid="+str(aid)+"&fnval=2&fnver=0&player=1&otype=json"
+    uis="avid"
+    if(flag==1):
+        uis="bvid"
+    url="https://api.bilibili.com/x/player/playurl?cid="+str(cid)+"&"+uis+"="+str(aid)+"&fnval=2&fnver=0&player=1&otype=json"
     url=url+"&qn="+str(qn)
     urlText=requests.get(url).text
     urlText=json.loads(urlText)
@@ -45,7 +50,12 @@ def proc_request(avu,aid):
 url=input("URL:")
 ret=re.match("https://www.bilibili.com/video/av(\\d+)",url)
 if(not ret):
-    print("Invalid bilibili video url")
+    ret=re.match("https://www.bilibili.com/video/BV([0-9a-zA-Z]+)",url)
+    if(not ret):
+        print("Invalid bilibili video url")
+    else:
+        bid=ret.group(1)
+        proc_request(url,bid,1)
 else:
     aid=ret.group(1)
-    proc_request(url,aid)
+    proc_request(url,aid,0)
