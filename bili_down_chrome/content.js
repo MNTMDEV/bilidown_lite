@@ -16,7 +16,15 @@ function get_vn(u) {
     return u;
 }
 
-chrome.extension.onMessage.addListener(
+function do_ins(tot_html){
+    $('#dl-disp').remove();
+    var ins=$('<div id="dl-disp"></div>');
+    ins.append("<br /><p>请使用迅雷下载以下链接(它们包含了视频和音频):</p>");
+    ins.append(tot_html);
+    $('#viewbox_report').after(ins);
+}
+
+chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         var mid = request.mid;
         if (mid == 0) {
@@ -32,7 +40,6 @@ chrome.extension.onMessage.addListener(
         }
         else if (mid == 1) {
             //controll
-            $('#viewbox_report').append("<br /><p>请使用迅雷下载以下链接(它们包含了视频和音频):</p>");
             var tot_html = "<ul>";
             for (var i = 0; i < url_list.length; i++) {
                 var link_html = "<a href='" + url_list[i] + "'>下载资源" + (i + 1) + "</a>";
@@ -41,7 +48,7 @@ chrome.extension.onMessage.addListener(
                 tot_html += "</li>";
             }
             tot_html += "</ul>";
-            $('#viewbox_report').append(tot_html);
+            do_ins(tot_html);
         }
         sendResponse({});
     });
