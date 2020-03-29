@@ -21,6 +21,7 @@
       ],
       "js": [
         "jquery.min.js",
+        "global.js",
         "content.js"
       ]
     }

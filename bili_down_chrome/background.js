@@ -11,21 +11,21 @@ chrome.browserAction.onClicked.addListener(function (tab) {
       mid: 1
     },
     function (response) {
-      console.log('Response');
+      crx_log('Response');
     });
 });
 
-function sendPackInfo(tid,url){
+function sendPackInfo(tid, url) {
   chrome.tabs.sendMessage(tid,
     {
       mid: 0,
       url: url
     },
     function (response) {
-      if(chrome.runtime.lastError){
-        console.log('Early load error...ignored')
+      if (chrome.runtime.lastError) {
+        crx_log('Early load error...ignored')
       }
-      console.log('Response');
+      crx_log('Response');
     });
 }
 
@@ -33,17 +33,44 @@ function sendPackInfo(tid,url){
 //catch bili video package event
 chrome.webRequest.onBeforeRequest.addListener(
   function (details) {
-    var ret={cancel:false};
+    var ret = { cancel: false };
     var url = details.url;
     var tid = details.tabId;
-    //filter of low quality audio
-    if (url.indexOf("30216.m4s") != -1)
-      return ret;
-    console.log("tab:"+tid);
-    sendPackInfo(tid,url);
+    crx_log("tab:" + tid);
+    sendPackInfo(tid, url);
     return ret;
   },
   { urls: ["https://*/upgcxcode/*"] },
   ["blocking"]
 );
 
+chrome.webRequest.onHeadersReceived.addListener(
+  function (details) {
+    var headers = details.responseHeaders;
+    var bFlag = false;
+    for (var i = 0; i < headers.length; i++) {
+      if (headers[i].name == "Content-Type") {
+        headers[i].value = "application/octet-stream";
+        bFlag = true;
+        break;
+      }
+    }
+    if (!bFlag) {
+      headers.push({ name: "Content-Type", value: "application/octet-stream" });
+    }
+    var fn=details.url;
+    var pos=0;
+    pos=fn.lastIndexOf("/");
+    if(pos!=-1){
+      fn=fn.substr(pos+1);
+    }
+    pos=fn.indexOf("?");
+    if(pos!=-1){
+      fn=fn.substr(0,pos);
+    }
+    headers.push({ name: "Content-Disposition", value: "attachment;filename="+fn });
+    return { responseHeaders: headers };
+  },
+  { urls: ["https://*/upgcxcode/*"] },
+  ["blocking", "responseHeaders"]
+);
