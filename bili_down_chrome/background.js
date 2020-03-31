@@ -11,6 +11,9 @@ chrome.browserAction.onClicked.addListener(function (tab) {
       mid: 1
     },
     function (response) {
+      if (chrome.runtime.lastError) {
+        alert("页面未加载完成或页面不是bili视频页")
+      }
       crx_log('Response');
     });
 });
