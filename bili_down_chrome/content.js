@@ -22,6 +22,7 @@ function do_ins(tot_html){
     ins.append("<br /><p>本喵已经资瓷直接点击下载以下链接(它们包含了视频和音频):</p>");
     ins.append(tot_html);
     $('#viewbox_report').after(ins);
+    $('#player_module').after(ins);
 }
 
 chrome.runtime.onMessage.addListener(
