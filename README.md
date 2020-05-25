@@ -21,6 +21,12 @@ Update:关于CRX_REQUIRED_PROOF_MISSING问题的解释
 
 开启开发者模式+刷新的情况下，拖入时背景会出现遮盖层。
 
+## m3u8_downloader
+
+附赠福利m3u8下载器，需要使用ffmpeg并且要将ffmpeg的路径加入PATH变量。
+
+m3u8暴力实现版，勿喷，IO速度应该可以到15MB/s。
+
 ## TODO
 
 - [x] 解决chrome插件中视频多开如何识别各个标签页的下载链接
