@@ -4,9 +4,7 @@ b站源视频下载chrome插件版，完全的支持无脑操作。
 
 Update:为了方便维护，python版已经迁移到了[bilidown_py](https://github.com/MNTMDEV/bilidown_py)中。
 
-Notice:近期计划启动C++版的项目[bilidown_cpp](https://github.com/MNTMDEV/bilidown_cpp)。
-
-人活着就是为了效率、代码执行时间！预期实现登录、下载、音视频合成。
+Notice:音视频合成可以使用ffmpeg。
 
 ## bili_down_chrome
 
