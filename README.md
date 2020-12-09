@@ -11,13 +11,11 @@ Notice:音视频合成可以使用ffmpeg，嫌麻烦可以使用[音视频合成
 这个就是我开发的第一个可用的chrome拓展版的bilidown插件了。你可以用它下载高画质视频，如果你登录的用户是大会员，您还可以下载大会员专属的视频。
 这个版本有些细节问题还需完善，后续还会更新。
 
-Update:关于CRX_REQUIRED_PROOF_MISSING问题的解释
+使用方法：
 
-这个程序没有上架商店，因此没有得到签名，必须开启开发者模式，再刷新chrome://extension/之后即可正常使用
+由于chrome浏览器的更新，未签名的crx包已经不允许安装
 
-拖入窗口如果显示的下载crx，一定会出现CRX_REQUIRED_PROOF_MISSING错误；
-
-开启开发者模式+刷新的情况下，拖入时背景会出现遮盖层。
+现在可行的方法是在chrome浏览器打开chrome://extensions，开启开发者模式，把crx后缀改成zip并解压，加载解压后的插件目录。
 
 ## m3u8_downloader
 
