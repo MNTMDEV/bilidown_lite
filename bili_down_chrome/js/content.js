@@ -102,10 +102,14 @@ chrome.runtime.onMessage.addListener(
         }
         else if (mid == 1) {
             getResourceEvent();
-            response=resourceList;
+            response = resourceList;
         }
         else if (mid == 2) {
             onUpdateUrl(request.url);
         }
         sendResponse(response);
     });
+
+$(function () {
+    resourceList.url = window.location.href;
+})
