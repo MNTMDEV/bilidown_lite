@@ -4,11 +4,64 @@
     <title>下载视频资源</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/download.css">
     <!-- <link rel="stylesheet" href="css/bootstrap-theme.min.css"> -->
     <script src="js/global.js"></script>
 </head>
 
 <body>
+    <div class="logo-div">
+        <img src="image/favicon.png" alt="logo">
+        <b>bilidown</b>
+    </div>
+    <div>
+        <a class="vtit"><span id="v-title">标题(BVxxx)</span></a>
+    </div>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">视频资源</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="videoSel">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">音频资源</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="audioSel">
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>类型</th>
+                <th>文件名</th>
+                <th>质量</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>视频</td>
+                <td><a target="_blank" id="fn-v">null</a></td>
+                <td id="qual-v">-1</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>音频</td>
+                <td><a target="_blank" id="fn-a">null</a></td>
+                <td id="qual-a">-1</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <button class="btn btn-primary" id="callClientBtn">使用bilidown客户端下载并合成</button>
+    </div>
+
     <!-- Footer Script Position -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

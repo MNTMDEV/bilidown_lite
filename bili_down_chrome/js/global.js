@@ -30,6 +30,20 @@ function open_window(url, options) {
 	window.open(url, "_blank", spec);
 }
 
+function getQueryStringByUrl(url, name) {
+	var params = "";
+	var pos = url.indexOf("?");
+	if (pos != -1) {
+		params = url.substr(pos + 1);
+	}
+	var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+	var r = params.match(reg);
+	if (r != null) {
+		return unescape(r[2]);
+	}
+	return null;
+}
+
 function getQueryString(name) {
 	var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
 	var r = window.location.search.substr(1).match(reg);
@@ -46,4 +60,36 @@ function queryResource(list, fileName) {
 			return i;
 	}
 	return -1;
+}
+
+// add referer parameter to download link
+function addRefererSignature(url, k, v) {
+	var pos = url.indexOf("?");
+	if (pos == -1) {
+		return url + "?" + k + "=" + v
+	}
+	else {
+		return url + "&" + k + "=" + v;
+	}
+}
+
+// get video file name
+function get_vn(u) {
+	var pos = 0;
+	//clear query string
+	pos = u.indexOf("?");
+	if (pos != -1) {
+		u = u.substr(0, pos);
+	}
+	//clear prefix https://???/???/ remain xxx.m4s
+	pos = u.lastIndexOf("/");
+	if (pos != -1) {
+		u = u.substr(pos + 1);
+	}
+	return u;
+}
+
+// get video id
+function get_vid(url) {
+	return get_vn(url);
 }

@@ -18,6 +18,7 @@ Notice:音视频合成可以使用ffmpeg，嫌麻烦可以使用[音视频合成
 
 ## TODO
 
-- [ ] WIP:UI优化，现在的UI有点简单粗暴了
-- [ ] 对接调用后续开发的bilidown_py的GUI程序
+- [x] UI优化，现在的UI有点简单粗暴了
+- [x] 对接调用后续开发的bilidown_py的GUI程序
 - [x] 解决标签页URL变化时不清空老页面资源的问题
+- [ ] UI页面内容完善

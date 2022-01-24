@@ -17,7 +17,7 @@
     {
       "run_at": "document_start",
       "matches": [
-        "https://*/*"
+        "https://www.bilibili.com/*"
       ],
       "js": [
         "js/jquery.min.js",

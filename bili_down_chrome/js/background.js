@@ -14,7 +14,6 @@ function sendPackInfo(tid, url) {
       if (chrome.runtime.lastError) {
         crx_log('Early load error...ignored')
       }
-      crx_log('Response');
     });
 }
 
@@ -29,7 +28,6 @@ var updateTargetTabUrl = function (tid, changeInfo, tab) {
         if (chrome.runtime.lastError) {
           crx_log('Early load error...ignored')
         }
-        crx_log('Response');
       });
   }
 }
@@ -44,13 +42,38 @@ chrome.webRequest.onBeforeRequest.addListener(
     var ret = { cancel: false };
     var url = details.url;
     var tid = details.tabId;
-    crx_log("tab:" + tid);
     sendPackInfo(tid, url);
     return ret;
   },
   { urls: ["https://*/upgcxcode/*"] },
   ["blocking"]
 );
+
+// referer modify
+chrome.webRequest.onBeforeSendHeaders.addListener(
+  function (details) {
+    var ref = getQueryStringByUrl(details.url, 'ref');
+    var bFlag = false;
+    var headers = details.requestHeaders;
+    if (ref != null) {
+      for (var i = 0; i < headers.length; i++) {
+        if (headers[i].name == "Referer") {
+          headers[i].value = window.atob(ref);
+          bFlag = true;
+          break;
+        }
+      }
+      if (!bFlag) {
+        headers.push({ name: "Referer", value: window.atob(ref) });
+      }
+    }
+    return { requestHeaders: headers };
+  },
+  { urls: ["https://*/upgcxcode/*"] },
+  ["blocking", "requestHeaders", "extraHeaders"]
+);
+
+
 
 // octet-stream converter
 chrome.webRequest.onHeadersReceived.addListener(
@@ -81,5 +104,5 @@ chrome.webRequest.onHeadersReceived.addListener(
     return { responseHeaders: headers };
   },
   { urls: ["https://*/upgcxcode/*"] },
-  ["blocking", "responseHeaders"]
+  ["blocking", "responseHeaders", "extraHeaders"]
 );

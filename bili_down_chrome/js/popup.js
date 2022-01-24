@@ -25,7 +25,14 @@ var initUI = function () {
             data: "",
             success: function (data) {
                 userInfo = data.data;
-                $('#bili-avatar').attr('src', userInfo.face);
+                if (userInfo.isLogin) {
+                    $('#bili-avatar').attr('src', userInfo.face);
+                    $('#vip_label').text(userInfo.vip_label.text);
+                    $('#uname').text(userInfo.uname);
+                }
+                else {
+                    //not login
+                }
             }
         });
 }
@@ -34,19 +41,9 @@ initUI();
 // jquery event functions
 $('#queryResource').click(function () {
     open_window("download.html?tid=" + currentTab.id, {
-        width: 500,
-        height: 280
+        width: 650,
+        height: 430
     });
-    // chrome.tabs.sendMessage(currentTab.id,
-    //     {
-    //         mid: 1
-    //     },
-    //     function (response) {
-    //         if (chrome.runtime.lastError) {
-    //             // alert("页面未加载完成或页面不是bili视频页")
-    //         }
-    //         crx_log('Response');
-    //     });
 })
 
 $('#displayAbout').click(function () {
