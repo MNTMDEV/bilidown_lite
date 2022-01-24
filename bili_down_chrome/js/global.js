@@ -39,3 +39,11 @@ function getQueryString(name) {
 	return null;
 }
 
+function queryResource(list, fileName) {
+	var datas = list.data;
+	for (var i = 0; i < datas.length; i++) {
+		if (datas[i].fileName == fileName)
+			return i;
+	}
+	return -1;
+}

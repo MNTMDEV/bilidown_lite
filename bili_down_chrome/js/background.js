@@ -18,6 +18,23 @@ function sendPackInfo(tid, url) {
     });
 }
 
+chrome.tabs.onUpdated.addListener(
+  function (tid, changeInfo, tab) {
+    if (changeInfo.status == "loading") {
+      chrome.tabs.sendMessage(tid,
+        {
+          mid: 2,
+          url: tab.url
+        },
+        function (response) {
+          if (chrome.runtime.lastError) {
+            crx_log('Early load error...ignored')
+          }
+          crx_log('Response');
+        });
+    }
+  });
+
 // background request filter
 // catch bili video package event
 chrome.webRequest.onBeforeRequest.addListener(
