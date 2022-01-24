@@ -20,17 +20,20 @@
         "https://*/*"
       ],
       "js": [
-        "jquery.min.js",
-        "global.js",
-        "content.js"
+        "js/jquery.min.js",
+        "js/global.js",
+        "js/content.js"
       ]
     }
   ],
   "browser_action": {
     "default_title": "Bilibili download",
-    "default_icon": {
-      "1": "favicon.png"
-    }
+    "default_popup": "popup.html",
+    "default_icon": "image/favicon.png"
+  },
+  "icons": {
+    "32": "image/favicon.png",
+    "48": "image/favicon48.png"
   },
   "manifest_version": 2
 }

@@ -16,17 +16,7 @@ Notice:音视频合成可以使用ffmpeg，嫌麻烦可以使用[音视频合成
 - 由于chrome浏览器的更新，未签名的crx包已经不允许安装。现在可行的方法是在chrome浏览器打开chrome://extensions，开启开发者模式，把crx后缀改成zip并解压，加载解压后的插件目录。
 - 为了更好的用户体验，即使不安装迅雷等多线程下载软件也可以使用浏览器直接下载，但是CDN有时候会对单连接限速，多线程下载可以使用[bilidown_py](https://github.com/MNTMDEV/bilidown_py)，20线程安排。
 
-## m3u8_downloader
-
-附赠福利m3u8下载器，需要使用ffmpeg并且要将ffmpeg的路径加入PATH变量。
-
-m3u8暴力实现版，勿喷，IO速度应该可以到15MB/s。
-
 ## TODO
 
-- [x] 解决chrome插件中视频多开如何识别各个标签页的下载链接
-- [ ] 页面未完全加载会执行脚本与它本身的js起冲突的问题
-- [x] 解除对于迅雷下载的依赖
-- [x] 支持番剧视频的抓取
 - [ ] UI优化，现在的UI有点简单粗暴了
 - [ ] 对接调用后续开发的bilidown_py的GUI程序

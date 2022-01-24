@@ -4,20 +4,6 @@
 
 // Called when the user clicks on the browser action.
 
-//click event
-chrome.browserAction.onClicked.addListener(function (tab) {
-  chrome.tabs.sendMessage(tab.id,
-    {
-      mid: 1
-    },
-    function (response) {
-      if (chrome.runtime.lastError) {
-        alert("页面未加载完成或页面不是bili视频页")
-      }
-      crx_log('Response');
-    });
-});
-
 function sendPackInfo(tid, url) {
   chrome.tabs.sendMessage(tid,
     {
@@ -32,8 +18,8 @@ function sendPackInfo(tid, url) {
     });
 }
 
-//background request filter
-//catch bili video package event
+// background request filter
+// catch bili video package event
 chrome.webRequest.onBeforeRequest.addListener(
   function (details) {
     var ret = { cancel: false };
@@ -47,6 +33,7 @@ chrome.webRequest.onBeforeRequest.addListener(
   ["blocking"]
 );
 
+// octet-stream converter
 chrome.webRequest.onHeadersReceived.addListener(
   function (details) {
     var headers = details.responseHeaders;
@@ -61,17 +48,17 @@ chrome.webRequest.onHeadersReceived.addListener(
     if (!bFlag) {
       headers.push({ name: "Content-Type", value: "application/octet-stream" });
     }
-    var fn=details.url;
-    var pos=0;
-    pos=fn.lastIndexOf("/");
-    if(pos!=-1){
-      fn=fn.substr(pos+1);
+    var fn = details.url;
+    var pos = 0;
+    pos = fn.lastIndexOf("/");
+    if (pos != -1) {
+      fn = fn.substr(pos + 1);
     }
-    pos=fn.indexOf("?");
-    if(pos!=-1){
-      fn=fn.substr(0,pos);
+    pos = fn.indexOf("?");
+    if (pos != -1) {
+      fn = fn.substr(0, pos);
     }
-    headers.push({ name: "Content-Disposition", value: "attachment;filename="+fn });
+    headers.push({ name: "Content-Disposition", value: "attachment;filename=" + fn });
     return { responseHeaders: headers };
   },
   { urls: ["https://*/upgcxcode/*"] },

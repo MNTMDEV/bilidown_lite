@@ -1,0 +1,28 @@
+body{
+    width: 200px;
+}
+
+.logo-div{
+    margin-left: 8px;
+    margin-top: 4px;
+}
+
+.logo-div img{
+    width: 24px;
+    height: 24px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.logo-div b{
+    vertical-align: middle;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 18px;
+}
+
+.nav-pills li a{
+    color: #4d4d4d;
+    font-size: 12px;
+    cursor: pointer;
+}
