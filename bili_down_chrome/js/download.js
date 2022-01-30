@@ -103,8 +103,14 @@ $('#videoSel').change(function () {
 
 $('#callClientBtn').click(function () {
     var url = "bilidown://total/";
-    var audioUrl = resourceList.data[parseInt($('#audioSel').val())].url;
-    var videoUrl = resourceList.data[parseInt($('#videoSel').val())].url;
+    var aIndex = $('#audioSel').val();
+    var vIndex = $('#videoSel').val();
+    if ((aIndex == null) || (vIndex == null)) {
+        alert("请选择要下载的视频和音频")
+        return;
+    }
+    var audioUrl = resourceList.data[parseInt(aIndex)].url;
+    var videoUrl = resourceList.data[parseInt(vIndex)].url;
     var pageUrl = resourceList.url;
     var payload = {
         a: audioUrl,
@@ -113,5 +119,6 @@ $('#callClientBtn').click(function () {
     };
     url += window.btoa(JSON.stringify(payload));
     crx_log(url);
-    window.location.href = url;
+    window.open(url);
+    window.close();
 })

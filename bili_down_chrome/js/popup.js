@@ -40,26 +40,20 @@ initUI();
 
 // jquery event functions
 $('#queryResource').click(function () {
-    open_window("download.html?tid=" + currentTab.id, {
-        width: 650,
-        height: 430
-    });
+    window.location.href= "download.html?tid=" + currentTab.id;
 })
 
 $('#displayAbout').click(function () {
-    open_window("about.html", {
-        width: 300,
-        height: 250
-    });
+    // open_window("about.html", {
+    //     width: 400,
+    //     height: 250
+    // });
+    window.open("about.html")
+    close_window();
 })
 
 $('#displayHelp').click(function () {
-    open_window("help.html", {
-        width: 300,
-        height: 250
-    });
-})
-
-$('.nav a').click(function () {
+    // window.open("help.html");
+    window.open("https://github.com/MNTMDEV/bilidown_lite/blob/master/README.md")
     close_window();
 })

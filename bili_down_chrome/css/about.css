@@ -1,0 +1,55 @@
+body{
+    margin-top: 12px;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    background-image: url('../image/bg-klee.png');
+    background-size: 100% 100%;
+}
+
+.div-center{
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    background-color: white;
+    border-radius: 6px;
+}
+
+.logo-div{
+    text-align: center;
+    border-bottom: 1px solid rgb(245,245,245);
+    padding: 6px;
+}
+
+.content-div{
+    border-bottom: 1px solid rgb(245,245,245);
+    padding: 16px;
+}
+
+.foot-div{
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.logo-div img{
+    position: relative;
+    width: 48px;
+    height: 48px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.logo-div b{
+    vertical-align: middle;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 42px;
+}
+
+.author-avatar{
+    width: 24px;
+}

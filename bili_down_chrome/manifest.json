@@ -1,7 +1,7 @@
 {
   "name": "Bilibili download",
   "description": "Bilibili download helper",
-  "version": "1.2.1",
+  "version": "2.3.1",
   "permissions": [
     "activeTab",
     "tabs",
