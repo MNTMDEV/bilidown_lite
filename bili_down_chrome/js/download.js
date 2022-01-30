@@ -102,7 +102,7 @@ $('#videoSel').change(function () {
 });
 
 $('#callClientBtn').click(function () {
-    var url = "bilidown://";
+    var url = "bilidown://total/";
     var audioUrl = resourceList.data[parseInt($('#audioSel').val())].url;
     var videoUrl = resourceList.data[parseInt($('#videoSel').val())].url;
     var pageUrl = resourceList.url;
