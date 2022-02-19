@@ -91,5 +91,17 @@ function get_vn(u) {
 
 // get video id
 function get_vid(url) {
-	return get_vn(url);
+	var ret = get_vn(url);
+	if(ret!="")
+		return ret;
+	else{
+		var pos = 0;
+		//clear query string
+		pos = url.indexOf("?");
+		if (pos != -1) {
+			url = url.substr(0, pos);
+			url = url.substr(0, url.length-1);
+			return get_vn(url);
+		}
+	}
 }

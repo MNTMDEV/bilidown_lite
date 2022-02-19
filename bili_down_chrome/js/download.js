@@ -106,18 +106,13 @@ $('#callClientBtn').click(function () {
     var aIndex = $('#audioSel').val();
     var vIndex = $('#videoSel').val();
     if ((aIndex == null) || (vIndex == null)) {
-        alert("请选择要下载的视频和音频")
+        alert("请选择要下载的视频和音频");
         return;
     }
     var audioUrl = resourceList.data[parseInt(aIndex)].url;
     var videoUrl = resourceList.data[parseInt(vIndex)].url;
-    var pageUrl = resourceList.url;
-    var payload = {
-        a: audioUrl,
-        v: videoUrl,
-        p: pageUrl
-    };
-    url += window.btoa(JSON.stringify(payload));
+    var payload = get_vid(resourceList.url) + "?a=" + window.encodeURIComponent(audioUrl) + "&v=" + window.encodeURIComponent(videoUrl);
+    url += payload;
     crx_log(url);
     window.open(url);
     window.close();
