@@ -1,79 +1,41 @@
-// var url_list = [];
-// var vn_list = [];
-var resourceList = {
-    url: null,
-    data: []
-};
-
-function getTypeAndQual(fileName) {
-    var qual = 0;
-    var type = 0;
-    var pref = fileName.replace(".m4s", "");
-    var pos = pref.lastIndexOf("-");
-    if (pos != -1) {
-        pref = pref.substr(pos + 1);
-    }
-    var para = parseInt(pref);
-    if ((para < 30200) && (para > 30000)) {
-        //video
-        type = 0;
-        qual = para - 30000;
-    }
-    else if (para < 30400) {
-        //audio
-        type = 1;
-        qual = para - 30200;
-    }
-    else {
-        //unkown? maybe video
-        type = -1;
-        qual = para % 200;
-    }
-    return {
-        type: type,
-        qual: qual
-    }
+const JSON_PREFIX = "window.__playinfo__=";
+const SCRIPT_FILTER = /;*/;
+var tabData = {
+    dashData: null,
+    url: null
 }
 
-function requestEvent(url) {
-    //get video name ****.m4s
-    var vn = get_vn(url);
-    var pos = queryResource(resourceList, vn);
-    crx_log('Accepted a link:' + url + '\r\n' + "Video name:" + vn);
-    var tq = getTypeAndQual(vn);
-    var item = {
-        fileName: vn,
-        url: url,
-        type: tq.type,
-        qual: tq.qual
-    }
-    if (pos == -1) {
-        // new resource
-        resourceList.data.push(item);
-    }
-    else {
-        // refresh old resource
-        if (resourceList.data[pos].url != url) {
-            resourceList.data[pos].url = url;
+var initPageInfo = function () {
+    tabData.dashData = null;
+    $('script').each(function () {
+        var content = $(this).text();
+        if (!content.startsWith(JSON_PREFIX)) {
+            return;
         }
-    }
+        tabData.dashData = JSON.parse($(this).text().replace(SCRIPT_FILTER, '').replace(JSON_PREFIX, '').trim()).data;
+        crx_log(tabData.dashData.dash);
+    });
 }
 
 // tab url changed event
 var onUpdateUrl = function (url) {
-    resourceList.url = url;
-    resourceList.data = [];
+    //not initiated
+    if (tabData.url == null) {
+        return;
+    }
+    if (url != tabData.url) {
+        //refresh dom
+        location.reload();
+    }
 }
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         var mid = request.mid;
         var response = {};
-        if (mid == 0) {
-            requestEvent(request.url);
-        }
-        else if (mid == 1) {
-            response = resourceList;
+        if (mid == 1) {
+            initPageInfo();
+            response = tabData;
         }
         else if (mid == 2) {
             onUpdateUrl(request.url);
@@ -82,5 +44,6 @@ chrome.runtime.onMessage.addListener(
     });
 
 $(function () {
-    resourceList.url = window.location.href;
+    initPageInfo();
+    tabData.url = window.location.href;
 })

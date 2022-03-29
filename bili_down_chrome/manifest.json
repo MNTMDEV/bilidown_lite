@@ -5,13 +5,14 @@
   "permissions": [
     "activeTab",
     "tabs",
-    "webRequest",
-    "webRequestBlocking",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback"
+  ],
+  "host_permissions": [
     "https://*/"
   ],
   "background": {
-    "page": "background.html",
-    "persistent": true
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
@@ -26,7 +27,7 @@
       ]
     }
   ],
-  "browser_action": {
+  "action": {
     "default_title": "Bilibili download",
     "default_popup": "popup.html",
     "default_icon": "image/favicon.png"
@@ -35,5 +36,5 @@
     "32": "image/favicon.png",
     "48": "image/favicon48.png"
   },
-  "manifest_version": 2
+  "manifest_version": 3
 }
