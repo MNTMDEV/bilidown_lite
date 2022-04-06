@@ -1,4 +1,4 @@
-const __DEBUG__ = true;
+const __DEBUG__ = false;
 
 function crx_log(s) {
 	if (__DEBUG__) {
