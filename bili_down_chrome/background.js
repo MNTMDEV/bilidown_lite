@@ -1,10 +1,21 @@
-﻿// Copyright (c) 2011 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-// Called when the user clicks on the browser action.
-
+﻿
 importScripts('js/global.js');
+importScripts('js/ruleset.js');
+
+//background page mesage handler
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    var mid = request.mid;
+    var response = null;
+    if (mid == 1) {
+        var url = request.url;
+        var name = request.name;
+        chrome.cookies.get({ url: url, name: name }, function (response) {
+            sendResponse(response);
+        });
+        return true;
+    }
+    sendResponse(response);
+});
 
 var updateTargetTabUrl = function (tid, changeInfo, tab) {
     if (changeInfo.url != undefined) {
@@ -21,11 +32,14 @@ var updateTargetTabUrl = function (tid, changeInfo, tab) {
     }
 }
 
+// url change event
+chrome.tabs.onUpdated.addListener(updateTargetTabUrl);
+
 // binary content-type for downloading
 chrome.declarativeNetRequest.updateDynamicRules({
-    removeRuleIds: [1],
+    removeRuleIds: [NET_REQUEST_RULES.DOWNLOAD_RULE],
     addRules: [{
-        id: 1,
+        id: NET_REQUEST_RULES.DOWNLOAD_RULE,
         priority: 1,
         condition: {
             "urlFilter": "https://*/upgcxcode/*",
@@ -41,3 +55,35 @@ chrome.declarativeNetRequest.updateDynamicRules({
         }
     }]
 });
+
+// bypass CORS rules
+chrome.declarativeNetRequest.updateDynamicRules({
+    removeRuleIds: [NET_REQUEST_RULES.CORS_BYPASS_RULE],
+    addRules: [{
+        id: NET_REQUEST_RULES.CORS_BYPASS_RULE,
+        priority: 1,
+        condition: {
+            "urlFilter": "https://*.bilibili.com/*",
+            "resourceTypes": ["main_frame"]
+        },
+        action: {
+            type: "modifyHeaders",
+            responseHeaders: [{
+                header: "content-security-policy-report-only",
+                operation: "set",
+                value: ""
+            }]
+        }
+    }]
+});
+
+initializeRuleset();
+
+//debug net request rule info
+// if (__DEBUG__) {
+//     chrome.declarativeNetRequest.onRuleMatchedDebug.addListener(
+//         function (request, rule) {
+//             console.log(request, rule);
+//         }
+//     )
+// }

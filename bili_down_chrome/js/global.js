@@ -6,6 +6,13 @@ function crx_log(s) {
 	}
 }
 
+var NET_REQUEST_RULES = {
+	DOWNLOAD_RULE: 1,
+	REFERER_BYPASS_RULE: 2,
+	CORS_BYPASS_RULE: 3,
+	MIN_CUSTOM_RULE: 10000
+};
+
 function getCurrentTab(callback) {
 	chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
 		if (callback) callback(tabs.length ? tabs[0] : null);
@@ -92,15 +99,15 @@ function get_vn(u) {
 // get video id
 function get_vid(url) {
 	var ret = get_vn(url);
-	if(ret!="")
+	if (ret != "")
 		return ret;
-	else{
+	else {
 		var pos = 0;
 		//clear query string
 		pos = url.indexOf("?");
 		if (pos != -1) {
 			url = url.substr(0, pos);
-			url = url.substr(0, url.length-1);
+			url = url.substr(0, url.length - 1);
 			return get_vn(url);
 		}
 	}

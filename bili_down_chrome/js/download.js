@@ -16,9 +16,9 @@ var processLoadingError = function () {
 
 var processRequestHandler = function (url) {
     chrome.declarativeNetRequest.updateDynamicRules({
-        removeRuleIds: [2],
+        removeRuleIds: [NET_REQUEST_RULES.REFERER_BYPASS_RULE],
         addRules: [{
-            id: 2,
+            id: NET_REQUEST_RULES.REFERER_BYPASS_RULE,
             priority: 1,
             condition: {
                 "urlFilter": "https://*/upgcxcode/*",
@@ -38,6 +38,9 @@ var processRequestHandler = function (url) {
 
 var processResponse = function (response) {
     tabData = response;
+    if (tabData.url != null) {
+        setTitleInfo();
+    }
     if (tabData.dashData == null) {
         return;
     }
@@ -70,7 +73,6 @@ var processResponse = function (response) {
         updateAudioInfo();
     if (vFlag)
         updateVideoInfo();
-    setTitleInfo();
 }
 
 var getTabCallback = function (tab) {

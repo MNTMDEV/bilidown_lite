@@ -1,32 +1,40 @@
 {
   "name": "Bilibili download",
   "description": "Bilibili download helper",
-  "version": "3.1.1",
+  "version": "4.1.1",
   "permissions": [
     "activeTab",
     "tabs",
+    "cookies",
+    "storage",
     "declarativeNetRequest",
     "declarativeNetRequestFeedback"
   ],
   "host_permissions": [
-    "https://*/"
+    "*://*/"
   ],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "run_at": "document_start",
+      "run_at": "document_end",
       "matches": [
-        "https://www.bilibili.com/*"
+        "https://www.bilibili.com/bangumi/play/*",
+        "https://www.bilibili.com/video/*"
       ],
       "js": [
         "js/jquery.min.js",
         "js/global.js",
+        "js/ruleset.js",
         "js/content.js"
       ]
     }
   ],
+  "web_accessible_resources": [{
+    "resources": ["js/bypass.js"],
+    "matches": ["<all_urls>"]
+  }],
   "action": {
     "default_title": "Bilibili download",
     "default_popup": "popup.html",
