@@ -17,3 +17,4 @@ b站源视频下载chrome插件版，完全的支持无脑操作。
 
 - [x] 考虑添加支持港番的feature
 - [ ] 支持代理规则自定义
+- [ ] ajax方式同步Cookie存在单包的big header问题，应当优化为使用chrome的api同步cookie
