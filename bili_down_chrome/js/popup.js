@@ -78,31 +78,37 @@ $('#proxyConfig').click(function () {
 })
 
 $('#syncCookie').click(async function () {
+    //判定是否为ssl
+    var ruleset = await readCustomizeRules();
+    var parser = document.createElement('a');
+    parser.href = ruleset.api_server;
+    var secure = parser.protocol == "https:";
+    var sameSite = secure ? "no_restriction" : "unspecified";
+    // 同步到该域名下
     var cookieDict = await chrome.cookies.getAll({ domain: ".bilibili.com" });
-    var result = {};
+    var success=true;
     for (var i = 0; i < cookieDict.length; i++) {
         var item = cookieDict[i];
-        var key = item.name;
-        var value = item.value;
         var domain = item.domain;
         if (domain != ".bilibili.com") {
             continue;
         }
-        result[key] = value;
-    }
-    var ruleset = await readCustomizeRules();
-    $.ajax({
-        url: ruleset.api_server + "/api/syncCookie",
-        method: "post",
-        contentType: "application/json;charset=UTF-8",
-        data: JSON.stringify(result),
-        success: function (data) {
-            alert("同步成功");
-        },
-        error: function () {
-            alert("同步失败");
+        var details = {
+            expirationDate: item.expirationDate,
+            httpOnly: item.httpOnly,
+            name: item.name,
+            sameSite: sameSite,
+            secure: secure,
+            url: ruleset.api_server,
+            value: item.value
+        };
+        try {
+            await chrome.cookies.set(details);
+        } catch (error) {
+            success=false;
         }
-    })
+    }
+    alert(success?"同步成功":"同步失败");
 })
 
 $('#displayAbout').click(function () {

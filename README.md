@@ -2,11 +2,11 @@
 
 b站源视频下载chrome插件版，完全的支持无脑操作。
 
-关于视频处理方法：音视频合成可以直接使用ffmpeg，嫌麻烦可以使用[音视频合成无脑版工具](https://github.com/MNTMDEV/Qtavcombine)，最简单实用的方法是使用[bilidown_py](https://github.com/MNTMDEV/bilidown_py)的bilidownGUI对接此插件一步到位。
+关于视频处理方法：音视频合成可以直接使用ffmpeg，最简单实用的方法是使用[bilidown_py](https://github.com/MNTMDEV/bilidown_py)的bilidownGUI对接此插件一步到位。
 
 ## bili_down_chrome
 
-这个就是我开发的第一个可用的chrome拓展版的bilidown插件了。你可以用它下载高画质视频，如果你登录的用户是大会员，您还可以下载大会员专属的视频。(港番支持在考虑做了)
+这个就是我开发的第一个可用的chrome拓展版的bilidown插件了。你可以用它下载高画质视频，如果你登录的用户是大会员，您还可以下载大会员专属的视频，还有港番支持功能可以使用。
 
 注意事项：
 - 由于chrome浏览器的更新，未签名的crx包已经不允许安装。现在可行的方法是在chrome浏览器打开chrome://extensions，开启开发者模式，把crx后缀改成zip并解压，加载解压后的插件目录。
@@ -15,6 +15,4 @@ b站源视频下载chrome插件版，完全的支持无脑操作。
 
 ## TODO
 
-- [x] 考虑添加支持港番的feature
 - [ ] 支持代理规则自定义
-- [ ] ajax方式同步Cookie存在单包的big header问题，应当优化为使用chrome的api同步cookie
