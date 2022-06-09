@@ -74,7 +74,7 @@ $('#enableProxy').click(async function () {
 })
 
 $('#proxyConfig').click(function () {
-    // window.location.href = "proxy-config.html";
+    window.location.href = "proxy-config.html";
 })
 
 $('#syncCookie').click(async function () {

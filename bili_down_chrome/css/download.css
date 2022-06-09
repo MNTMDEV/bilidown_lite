@@ -6,10 +6,6 @@ body{
     width: 450px;
 }
 
-a{
-    cursor: pointer;
-}
-
 .vtit{
     font-weight: 500;
     font-size: 18px;

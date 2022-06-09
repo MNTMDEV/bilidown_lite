@@ -5,3 +5,7 @@ body{
     margin-bottom: 16px;
     width: 450px;
 }
+
+#proxy{
+    min-height: 200px;
+}
