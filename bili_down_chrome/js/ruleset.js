@@ -4,13 +4,8 @@ const DEFAULT_RULESET = {
     proxy: [{
         id: 10002,
         priority: 1,
-        url_pattern: "^https://api.bilibili.com/x/web-interface/search/",
+        url_pattern: "^https://api.bilibili.com/",
         name: "search_rule"
-    }, {
-        id: 10003,
-        priority: 1,
-        url_pattern: "^https://api.bilibili.com/pgc/",
-        name: "play_rule"
     }]
 };
 
